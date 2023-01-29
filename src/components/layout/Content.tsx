@@ -15,8 +15,8 @@ const Content = () => {
     <>
       <Button title="Add" onClick={addNewGate} />
       <GatesContainer>
-        {gates.map((gate) => (
-          <Gate state={gate.state} />
+        {gates.map((gate, key) => (
+          <Gate key={key} state={gate.state} />
         ))}
       </GatesContainer>
     </>
@@ -24,7 +24,8 @@ const Content = () => {
 };
 
 const GatesContainer = styled.div`
-  display: flex;
+  /* display: flex; */
+  position: relative;
 `;
 
 export default Content;
