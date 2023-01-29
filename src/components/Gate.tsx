@@ -12,18 +12,24 @@ interface StyledProps {
 
 const Gate = (props: Props) => {
   const { state } = props;
-  const [lastPosition, setLastPosition] = useState<PositionInterface>({
+  const [previousPosition, setPreviousPosition] = useState<PositionInterface>({
     x: 0,
     y: 0,
   });
   const [position, setPosition] = useState<PositionInterface>({ x: 0, y: 0 });
 
-  const dragStartHandler = (event: React.MouseEvent) => {
-    setLastPosition({ x: event.clientX, y: event.clientY });
+  const dragStartHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+    setPreviousPosition({
+      x: event.clientX - event.currentTarget.offsetLeft,
+      y: event.clientY - event.currentTarget.offsetTop,
+    });
   };
 
   const dragEndHandler = (event: React.MouseEvent<HTMLDivElement>) => {
-    setPosition({ x: event.clientX, y: event.clientY });
+    setPosition({
+      x: event.clientX - previousPosition.x,
+      y: event.clientY - previousPosition.y,
+    });
   };
 
   return (

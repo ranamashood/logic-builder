@@ -24,7 +24,6 @@ const Content = () => {
 };
 
 const GatesContainer = styled.div`
-  /* display: flex; */
   position: relative;
 `;
 
