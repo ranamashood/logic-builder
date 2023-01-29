@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { PositionInterface } from "../models";
 
 interface Props {
+  startingPosition: PositionInterface;
   state: boolean;
 }
 

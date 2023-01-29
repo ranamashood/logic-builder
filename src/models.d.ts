@@ -6,3 +6,7 @@ export interface PositionInterface {
   x: number;
   y: number;
 }
+
+export interface GateInfoInterface {
+  name: string;
+}
