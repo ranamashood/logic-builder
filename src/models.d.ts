@@ -1,5 +1,6 @@
 export interface GateInterface {
   state: boolean;
+  startingPosition: PositionInterface;
 }
 
 export interface PositionInterface {

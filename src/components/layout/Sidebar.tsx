@@ -2,7 +2,7 @@ import { gates } from "../../data";
 import AddGate from "../AddGate";
 
 interface Props {
-  addGateHandler: () => void;
+  addGateHandler: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 const Sidebar = (props: Props) => {
@@ -13,7 +13,7 @@ const Sidebar = (props: Props) => {
       Gates
       {gates.map((gate, key) => {
         const { name } = gate;
-        return <AddGate name={name} onClick={addGateHandler} />;
+        return <AddGate key={key} name={name} onClick={addGateHandler} />;
       })}
     </div>
   );

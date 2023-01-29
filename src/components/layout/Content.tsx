@@ -8,8 +8,17 @@ import Sidebar from "./Sidebar";
 const Content = () => {
   const [gates, setGates] = useState<GateInterface[]>([]);
 
-  const addGateHandler = () => {
-    setGates([...gates, { state: true }]);
+  const addGateHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+    setGates([
+      ...gates,
+      {
+        state: true,
+        startingPosition: {
+          x: event.clientX,
+          y: event.clientY,
+        },
+      },
+    ]);
   };
 
   return (
@@ -18,7 +27,11 @@ const Content = () => {
       {/* <Button title="Add" onClick={addGateHandler} /> */}
       <GatesContainer>
         {gates.map((gate, key) => (
-          <Gate key={key} state={gate.state} />
+          <Gate
+            key={key}
+            state={gate.state}
+            startingPosition={gate.startingPosition}
+          />
         ))}
       </GatesContainer>
     </Wrapper>
@@ -30,7 +43,7 @@ const Wrapper = styled.div`
 `;
 
 const GatesContainer = styled.div`
-  position: relative;
+  /* position: relative; */
 `;
 
 export default Content;

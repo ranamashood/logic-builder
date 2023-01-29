@@ -1,12 +1,18 @@
+import styled from "styled-components";
+
 interface Props {
   name: string;
-  onClick: () => void;
+  onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 const AddGate = (props: Props) => {
   const { name, onClick } = props;
 
-  return <div onMouseDown={onClick}>{name}</div>;
+  return <Wrapper onMouseDown={onClick}>{name}</Wrapper>;
 };
+
+const Wrapper = styled.div`
+  user-select: none;
+`;
 
 export default AddGate;

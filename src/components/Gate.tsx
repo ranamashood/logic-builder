@@ -12,12 +12,15 @@ interface StyledProps {
 }
 
 const Gate = (props: Props) => {
-  const { state } = props;
+  const { state, startingPosition } = props;
   const [previousPosition, setPreviousPosition] = useState<PositionInterface>({
     x: 0,
     y: 0,
   });
-  const [position, setPosition] = useState<PositionInterface>({ x: 0, y: 0 });
+  const [position, setPosition] = useState<PositionInterface>({
+    x: startingPosition.x,
+    y: startingPosition.y,
+  });
 
   const dragStartHandler = (event: React.MouseEvent<HTMLDivElement>) => {
     setPreviousPosition({
