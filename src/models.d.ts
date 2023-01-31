@@ -10,4 +10,5 @@ export interface PositionInterface {
 
 export interface GateInfoInterface {
   name: string;
+  image: string;
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { PositionInterface } from "../models";
+import AndGate from "../svgs/AndGate";
 
 interface Props {
   startingPosition: PositionInterface;
@@ -44,6 +45,7 @@ const Gate = (props: Props) => {
       onDragEnd={dragEndHandler}
     >
       {state ? 1 : 0}
+      <AndGate />
     </Wrapper>
   );
 };

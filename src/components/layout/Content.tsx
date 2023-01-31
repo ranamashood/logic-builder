@@ -9,10 +9,14 @@ const Content = () => {
   const [gates, setGates] = useState<GateInterface[]>([]);
 
   const addGateHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+    let state: boolean = false;
+    if (event.currentTarget.innerHTML.toLowerCase() !== "input") {
+      state = true;
+    }
     setGates([
       ...gates,
       {
-        state: true,
+        state: state,
         startingPosition: {
           x: event.clientX,
           y: event.clientY,
