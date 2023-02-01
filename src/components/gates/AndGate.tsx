@@ -1,14 +1,41 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+interface StyledProps {
+  wireScale: number;
+}
+
 const AndGate = () => {
-  const createWire = () => {};
+  const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
+  const [wireScale, setWireScale] = useState<number>(1);
+
+  const createWire = () => {
+    setIsMouseDown(true);
+  };
+
+  const extendWire = (event: React.MouseEvent) => {
+    setWireScale(event.clientX / 40);
+  };
+
+  // useEffect(
+  //   (event: React.MouseEvent) => {
+  //     if (isMouseDown) {
+  //       setWireScale(event.clientX / 50);
+  //     }
+  //   },
+  //   [isMouseDown]
+  // );
 
   return (
     <Wrapper>
       <Body />
       <Bar>
         <Circle onMouseDown={createWire} />
-        <Wire />
+        {isMouseDown && (
+          <Circle isEnd={true} onMouseMove={extendWire}>
+            <Wire wireScale={wireScale} />
+          </Circle>
+        )}
       </Bar>
     </Wrapper>
   );
@@ -33,14 +60,24 @@ const Bar = styled.div`
   background-color: grey;
 `;
 
-const Circle = styled.div`
+const Circle = styled.div<{ isEnd?: boolean }>`
   position: absolute;
   width: 10px;
   height: 10px;
   border: 2px solid black;
   border-radius: 50%;
   right: 0;
-  transform: translate(90%, -30%);
+  transform: translate(90%, -30%) scaleX(1);
+`;
+
+const Wire = styled.div<StyledProps>`
+  position: absolute;
+  width: 30px;
+  height: 10px;
+  background-color: red;
+  left: 120%;
+  transform-origin: left;
+  transform: scaleX(${(props) => props.wireScale});
 `;
 
 export default AndGate;

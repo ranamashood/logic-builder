@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { PositionInterface } from "../models";
 import AndGate from "../svgs/AndGate";
@@ -22,15 +22,44 @@ const Gate = (props: Props) => {
     x: startingPosition.x,
     y: startingPosition.y,
   });
+  const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
 
   const dragStartHandler = (event: React.MouseEvent<HTMLDivElement>) => {
-    setPreviousPosition({
+    setIsMouseDown(true);
+    // console.log("Mouse: ", event.clientX, event.clientY);
+    // console.log(
+    //   "Eleme: ",
+    //   event.currentTarget.offsetLeft,
+    //   event.currentTarget.offsetTop
+    // );
+    // console.log(
+    //   "Subtr: ",
+    //   event.clientX - event.currentTarget.offsetLeft,
+    //   event.clientY - event.currentTarget.offsetTop
+    // );
+    setPosition({
       x: event.clientX - event.currentTarget.offsetLeft,
       y: event.clientY - event.currentTarget.offsetTop,
     });
   };
 
+  const dragHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (isMouseDown) {
+      // console.log("Mouse: ", event.clientX, event.clientY);
+      // console.log(
+      //   "Eleme: ",
+      //   event.currentTarget.offsetLeft,
+      //   event.currentTarget.offsetTop
+      // );
+      setPosition({
+        x: event.clientX - previousPosition.x,
+        y: event.clientY - previousPosition.y,
+      });
+    }
+  };
+
   const dragEndHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+    setIsMouseDown(false);
     setPosition({
       x: event.clientX - previousPosition.x,
       y: event.clientY - previousPosition.y,
@@ -40,9 +69,9 @@ const Gate = (props: Props) => {
   return (
     <Wrapper
       position={position}
-      draggable={true}
-      onDragStart={dragStartHandler}
-      onDragEnd={dragEndHandler}
+      onMouseDown={dragStartHandler}
+      onMouseMove={dragHandler}
+      onMouseUp={dragEndHandler}
     >
       {state ? 1 : 0}
       <AndGate />
@@ -56,6 +85,7 @@ const Wrapper = styled.div<StyledProps>`
   position: absolute;
   left: ${(props) => props.position.x}px;
   top: ${(props) => props.position.y}px;
+  user-select: none;
 `;
 
 export default Gate;
