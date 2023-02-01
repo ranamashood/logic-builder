@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { GateInterface } from "../../models";
 import Button from "../Button";
 import Gate from "../Gate";
+import AndGate from "../gates/AndGate";
 import Sidebar from "./Sidebar";
 
 const Content = () => {
@@ -38,6 +39,7 @@ const Content = () => {
           />
         ))}
       </GatesContainer>
+      <AndGate />
     </Wrapper>
   );
 };
